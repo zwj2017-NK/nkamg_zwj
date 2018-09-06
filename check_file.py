@@ -59,7 +59,9 @@ def check(list_path):
               except Exception,e:
                 list_except.append((path_dir + item,32))
                 continue
-            list_except.append((path_dir + item,3))
+              list_except.append((path_dir + item,3))
+            list_except.append((path_dir + item,4))
+            
 
   with open('test_report.txt','wb') as f:
     for line in list_except:
