@@ -1,8 +1,18 @@
-#!/usr/bin/env python
+#!usr/bin/env python
 #-*- coding: utf-8 -*-
 
 import os
+import codecs
+import hashlib
+
 list_str = '0123456789abcdef'
+
+def get_sha256(x):
+  f = codecs.open(x, 'rb')
+  sh = hashlib.sha256()
+  sh.update(f.read())
+  sha256=sh.hexdigest()
+  return sha256
 
 def check(list_path):
   list_except = []
@@ -14,8 +24,18 @@ def check(list_path):
           paths = os.listdir(path_dir)
 
           for item in paths:
-            if len(item) == 64:
+            if len(item) == 64 and item.lower() == item:
+              sha256 = get_sha256(path_dir + item)
+              if sha256 <> item:
+                list_except.append((path_dir + item, 0))
               continue
+            else:
+              if len(item) == 64:
+                try:
+                  os.rename(path_dir + item, path_dir + item.lower())
+                except Exception,e:
+                  list_except.append((path_dir + item, 1))
+                continue
 
             if '.data' in item and len(item) == 69:
               continue
@@ -26,7 +46,7 @@ def check(list_path):
             if '.csv' in item and len(item) == 11:
               continue
 
-            list_except.append(path_dir + item)
+            list_except.append((path_dir + item,3))
             if '.apk' in item:
               try:
                 os.rename(item, item[:-4].lower())
@@ -35,7 +55,7 @@ def check(list_path):
 
   with open('test_report.txt','wb') as f:
     for line in list_except:
-      f.write(line + '\n')
+      f.write(str(line) + '\n')
 
 if __name__ == '__main__':
-  check(['/data/malware','/data/benign'])
+  check(['/data/malware','/data/benign'])                                                                                                                                                                             1,3          顶端
