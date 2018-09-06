@@ -1,12 +1,14 @@
+#!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
 import os
 
 def change_attribute(list_path):
   for path_hd in list_path:
-    os.system('chown nkamg -R ' + path_hd)
-    os.system('chgrp nkamg -R ' + path_hd)
-    os.system('chmod 644 -R ' + path_hd)
+    pass
+    #os.system('chown nkamg -R ' + path_hd)
+    #os.system('chgrp nkamg -R ' + path_hd)
+    #os.system('chmod 644 -R ' + path_hd)
   
 
 def chmod_dir(path_list):
@@ -27,6 +29,8 @@ def chmod_dir(path_list):
       os.system('chmod 744 ' + path_dir)
       print k
    
-  if __name__ == '__main__':
-    change_attribute([path_malhd, path_benhd])
-    chmod_dir([path_malhd, path_benhd])
+if __name__ == '__main__':
+  path_malhd = '/data/malware'
+  path_benhd = '/data/benign'
+  change_attribute([path_malhd, path_benhd])
+  chmod_dir([path_malhd, path_benhd])
