@@ -5,7 +5,7 @@ import os
 
 list_str = '0123456789abcdef'
 
-#更改文件夹的权限为744
+#更改文件夹的权限为744，并且将文件的权限设置为644
 def chmod_dir(path_list):
   for path_hd in path_list:
     for i in list_str:
@@ -13,6 +13,7 @@ def chmod_dir(path_list):
         for k in list_str:
           path_dir = "{0}/{1}/{2}/{3}".format(path_hd, i, j, k)
           os.system('chmod 744 ' + path_dir)
+          os.system('chmod 644' + path_dir + '/*')
           print i+j+k
     for i in list_str:
       for j in list_str:
