@@ -28,8 +28,8 @@ def move_apk(filename):
 def main():
   pool = mp.Pool(32)
   list_filename = os.listdir(path_src)
-  for time in xrange(len(list_filename) + 1):
-    pool.map(move_apk, list_filename[time * 32 : (time + 1) * 32])
+  for seq in xrange(len(list_filename) + 1):
+    pool.map(move_apk, list_filename[seq * 32 : (seq + 1) * 32])
   pool.close()  
 
 if __name__ == '__main__':
