@@ -12,16 +12,13 @@ def return_path(path_des, filename):
   return "{0}/{1}/{2}/{3}/".format(path_des, filename[0], filename[1], filename[2])
 
 def move_apk(filename):
+  if len(filename) < 64:
+    return
   if os.path.exists(return_path(path_des,filename) + filename):
     return
-  
   if 'download' in filename:
-    try:
-      os.rename(path_src + filename, path_src + filename.split('sha256=')[-1])
-    except Exception,e:
-      print str(e)
-      return
-    shutil.move(path_src + filename.split('sha256=')[-1], return_path(path_des, filename.split('sha256=')[-1]))
+    os.system('mv ' + path_src + filename + ' ' + path_src + filename.split('sha256=')[-1])
+    os.system('mv ' + path_src + filename.split('sha256=')[-1] + ' ' + return_path(path_des, filename.split('sha256=')[-1]))
   else:
     shutil.move(path_src + filename, return_path(path_des, filename))
 
