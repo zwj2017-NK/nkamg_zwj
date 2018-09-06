@@ -25,7 +25,7 @@ def chmod_dir(path_list):
       print k
 
 #更改文件目录下文件夹和文件的组属性
-def changegroup(path_list):
+def change_group(path_list):
   for path_hd in path_list:
     os.system('chgrp nkamg -R ' + path_hd)
 
@@ -51,7 +51,7 @@ def main():
   path_benhd = '/data/benign'
   remove_apk_suffix([path_malhd, path_benhd])
   chmod_dir([path_malhd, path_benhd])
-  changegroup([path_malhd, path_benhd])
+  change_group([path_malhd, path_benhd])
   
 if __name__ == '__main__':
   main()
