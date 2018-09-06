@@ -15,7 +15,7 @@ def check(suffix):
     path_dir = "{0}/{1}/{2}/{3}/".format(path_hd, suffix[0], suffix[1], suffix[2])
     paths = os.listdir(path_dir)
    
-    list_sha256 = list(set([i[:64] for i in paths if len(i) > 60]))
+    list_sha256 = list(set([i[:64] for i in paths if len(i) >= 64]))
     
     for sha256 in list_sha256:
       if os.path.exists(path_dir + sha256 + '.data'): 
