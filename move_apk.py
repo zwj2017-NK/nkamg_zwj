@@ -21,6 +21,7 @@ def move_apk(filename):
     os.system('mv ' + path_src + filename.split('sha256=')[-1] + ' ' + return_path(path_des, filename.split('sha256=')[-1]))
   else:
     shutil.move(path_src + filename, return_path(path_des, filename))
+  print return_path(path_des, filename) + filename
 
 def main():
   pool = mp.Pool(32)
