@@ -49,7 +49,6 @@ def check(list_path):
             if '.csv' in item and len(item) == 11:
               continue
 
-            
             if '.apk' in item:
               try:
                 if sha256 == item[:-4].lower():
