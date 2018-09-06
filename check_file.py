@@ -49,12 +49,18 @@ def check(list_path):
             if '.csv' in item and len(item) == 11:
               continue
 
-            list_except.append((path_dir + item,3))
+            
             if '.apk' in item:
               try:
-                os.rename(item, item[:-4].lower())
+                if sha256 == item[:-4].lower():
+                  os.rename(item, item[:-4].lower())
+                else:
+                  list_except.append((path_dir + item,31))
+                  continue
               except Exception,e:
-                os.remove(path_dir + item)
+                list_except.append((path_dir + item,32))
+                continue
+            list_except.append((path_dir + item,3))
 
   with open('test_report.txt','wb') as f:
     for line in list_except:
