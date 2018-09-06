@@ -21,7 +21,8 @@ def check(suffix):
       if os.path.exists(path_dir + sha256 + '.data'): 
         continue
       else:
-        list_except.append(path_dir + sha256)
+        if os.path.exists(path_dir + sha256):
+          list_except.append(path_dir + sha256)
     print path_dir
   return list_except
 
