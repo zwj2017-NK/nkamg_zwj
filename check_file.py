@@ -24,17 +24,20 @@ def check(list_path):
           paths = os.listdir(path_dir)
 
           for item in paths:
+            sha256 = get_sha256(path_dir + item)
             if len(item) == 64 and item.lower() == item:
-              sha256 = get_sha256(path_dir + item)
               if sha256 <> item:
                 list_except.append((path_dir + item, 0))
               continue
             else:
               if len(item) == 64:
-                try:
-                  os.rename(path_dir + item, path_dir + item.lower())
+                try: 
+                  if sha256 == item.lower():
+                    os.rename(path_dir + item, path_dir + item.lower())
+                  else:
+                    list_except.append((path_dir + item, 11))
                 except Exception,e:
-                  list_except.append((path_dir + item, 1))
+                  list_except.append((path_dir + item, 12))
                 continue
 
             if '.data' in item and len(item) == 69:
