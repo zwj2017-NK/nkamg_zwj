@@ -7,7 +7,7 @@ import multiprocessing as mp
 import hashlib
 import codecs
 
-#把apk文件从文件夹移动到三层目录下
+#把样本文件，特征文件，布局文件，从文件夹移动到三层目录下
 path_src= '/data/test'
 path_des = '/data/malware'
 
