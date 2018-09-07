@@ -38,7 +38,7 @@ if __name__ == '__main__':
 
   for m in xrange(len(list_path) / 32 + 1):
     result = pool.map(check, list_path[32 * m : 32 * (m + 1)])
-    with open('report_about_feature.txt','ab') as f:
+    with open('todo_list_for_feature.txt','ab') as f:
       for each in result:
         if len(each) == 0:
           continue
