@@ -14,16 +14,13 @@ def check(suffix):
   for path_hd in ['/data/benign', '/data/malware']:
     path_dir = "{0}/{1}/{2}/{3}/".format(path_hd, suffix[0], suffix[1], suffix[2])
     paths = os.listdir(path_dir)
-   
     list_sha256 = list(set([i[:64] for i in paths if len(i) >= 64]))
-    
     for sha256 in list_sha256:
       if os.path.exists(path_dir + sha256 + '.data') and os.path.exists(path_dir + sha256): 
         continue
       else:
         if os.path.exists(path_dir + sha256):
           list_except.append(sha256)
-          
         #if os.path.exists(path_dir + sha256 + '.data'):
         #  list_except.append(sha256 + '*')
     print path_dir
