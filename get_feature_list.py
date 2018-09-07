@@ -18,11 +18,13 @@ def check(suffix):
     list_sha256 = list(set([i[:64] for i in paths if len(i) >= 64]))
     
     for sha256 in list_sha256:
-      if os.path.exists(path_dir + sha256 + '.data'): 
+      if os.path.exists(path_dir + sha256 + '.data') and os.path.exists(path_dir + sha256): 
         continue
       else:
         if os.path.exists(path_dir + sha256):
           list_except.append(path_dir + sha256)
+        if os.path.exists(path_dir + sha256 + '.data'):
+          list_except.append(path_dir + sha256 + '*')
     print path_dir
   return list_except
 
