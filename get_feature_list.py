@@ -15,9 +15,9 @@ def check(list_suffix):
       for filename in paths:
         if len(filename) <> 64:
           continue
-        if os.path.exists(path_dir + filename) and not os.path.exists(path_dir + filename + '.data'): 
-          list_except.append(sha256)
-      print path_dir
+        if os.path.exists(path_dir + filename) and not os.path.exists(path_dir + filename + '.data'):
+          list_except.append(filename)
+      #print path_dir
   return list_except
 
 def main():
@@ -31,6 +31,7 @@ def main():
   m = len(list_path) / 32
   list_task = [list_path[m * i : m * (i + 1)] for i in xrange(32)]
   result = pool.map(check, list_task)
+  print result
   with open('todo_list_for_feature.txt','ab') as f:
     for each in result:
       if len(each) == 0:
@@ -43,4 +44,3 @@ def main():
   pool.close()
 if __name__ == '__main__':
   main()
-  
