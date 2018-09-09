@@ -22,14 +22,12 @@ def check(suffix):
     path_dir = "{0}/{1}/{2}/{3}/".format(path_hd, suffix[0], suffix[1], suffix[2])
     paths = os.listdir(path_dir)
     for item in paths:
-      if 'xml' in item or 'data' in item or 'csv' in item or 'txt' in item:
+      if 'xml' in item or 'data' in item or 'csv' in item:
         continue
-
       if len(item) == 64:
         sha256 = get_sha256(path_dir + item)
         if sha256 <> item:
           list_except.append(path_dir + item)
-
     print path_dir
   return list_except
 
