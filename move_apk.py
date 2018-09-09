@@ -8,8 +8,8 @@ import hashlib
 import codecs
 
 #把样本文件，特征文件，布局文件，从文件夹移动到三层目录下
-path_src= '/data/test'
-path_des = '/data/malware'
+PATH_SRC= '/data/test'
+PATH_DES = '/data/malware'
 
 def get_sha256(x):
   f = codecs.open(x, 'rb')
@@ -28,18 +28,18 @@ def move_apk(list_filename):
     if 'data' in filename or 'xml' in filename:
       return
 
-    path_file = path_src + '/' + filename
+    path_file = PATH_SRC + '/' + filename
     sha256 = get_sha256(path_file)
     if sha256 == filename:
-      os.system('mv ' + path_file + ' ' + return_path(path_des, filename))
+      os.system('mv ' + path_file + ' ' + return_path(PATH_DES, filename))
       print path_file
 
       if os.path.exists(path_file + '.data'):
-        os.system('mv ' + path_src + '/' + filename + '.data' + ' ' + return_path(path_des, filename))
+        os.system('mv ' + path_file + '.data' + ' ' + return_path(PATH_DES, filename))
         print path_file + '.data'
 
       if os.path.exists(path_file + '.xml'):
-        os.system('mv ' + path_src + '/' + filename + '.xml' + ' ' + return_path(path_des, filename))
+        os.system('mv ' + path_file  + '.xml' + ' ' + return_path(PATH_DES, filename))
         print path_file + '.xml'
 
 def main():
