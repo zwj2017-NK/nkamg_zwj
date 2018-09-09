@@ -6,17 +6,18 @@ import codecs
 import hashlib
 import multiprocessing as mp
 
-def check(suffix):
+def check(list_suffix):
   list_except = []
-  for path_hd in ['/data/benign', '/data/malware']:
-    path_dir = "{0}/{1}/{2}/{3}/".format(path_hd, suffix[0], suffix[1], suffix[2])
-    paths = os.listdir(path_dir)
-    for filename in paths:
-      if len(filename) <> 64:
-        continue
-      if os.path.exists(path_dir + filename) and not os.path.exists(path_dir + filename + '.data'): 
-        list_except.append(sha256)
-    print path_dir
+  for suffix in list_suffix:
+    for path_hd in ['/data/benign', '/data/malware']:
+      path_dir = "{0}/{1}/{2}/{3}/".format(path_hd, suffix[0], suffix[1], suffix[2])
+      paths = os.listdir(path_dir)
+      for filename in paths:
+        if len(filename) <> 64:
+          continue
+        if os.path.exists(path_dir + filename) and not os.path.exists(path_dir + filename + '.data'): 
+          list_except.append(sha256)
+      print path_dir
   return list_except
 
 def main():
