@@ -29,3 +29,5 @@ def extract():
 
   #with open('time.txt','ab') as f:
   #  f.write(return_time() + '\n')
+if __name__ == '__main__':
+  extract()
