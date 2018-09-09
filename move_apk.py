@@ -27,24 +27,21 @@ def move_apk(list_filename):
       return
     if 'data' in filename or 'xml' in filename:
       return
-
     path_file = PATH_SRC + '/' + filename
     sha256 = get_sha256(path_file)
     if sha256 == filename:
       os.system('mv ' + path_file + ' ' + return_path(PATH_DES, filename))
       print path_file
-
       if os.path.exists(path_file + '.data'):
         os.system('mv ' + path_file + '.data' + ' ' + return_path(PATH_DES, filename))
         print path_file + '.data'
-
       if os.path.exists(path_file + '.xml'):
         os.system('mv ' + path_file  + '.xml' + ' ' + return_path(PATH_DES, filename))
         print path_file + '.xml'
 
 def main():
   #pool = mp.Pool(32)
-  list_filename = os.listdir(path_src)
+  list_filename = os.listdir(PATH_SRC)
   #for seq in xrange(len(list_filename) + 1):
   #  pool.map(move_apk, list_filename[seq * 32 : (seq + 1) * 32])
   #pool.close()
