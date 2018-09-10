@@ -22,24 +22,30 @@ def return_path(path, filename):
   return "{0}/{1}/{2}/{3}/".format(path, filename[0], filename[1], filename[2])
 
 def move_apk(list_filename):
+  detect_pattern='[0123456789abcdef]{64}$'
   for filename in list_filename:
-    if len(filename) < 64:
+    if not re.match(detect_pattern, filename):
       continue
+
+    #if len(filename) < 64:
+    #  continue
 
     path_file = PATH_SRC + '/' + filename
-    if 'data' in filename:
-      os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
-      print path_file + '.data'
-      continue
+    #if 'data' in filename:
+    #  os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
+    #  print path_file + '.data'
+    #  continue
 
-    if 'xml' in filename:
-      os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
-      print path_file + '.xml'
-      continue
+    #if 'xml' in filename:
+    #  os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
+    #  print path_file + '.xml'
+    #  continue
 
     sha256 = get_sha256(path_file)
     if sha256 == filename:
       os.system('mv ' + path_file + ' ' + return_path(PATH_DES, filename))
+      os.system('mv ' + path_file  + '.data ' + return_path(PATH_DES, filename))
+      os.system('mv ' + path_file  + '.xml ' + return_path(PATH_DES, filename))
       print path_file
 
 def main():
