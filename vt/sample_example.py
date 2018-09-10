@@ -147,15 +147,11 @@ def update_todo(list_res):
 def write_res(list_res):
   if len(list_res) == 0:
     return
-
   if os.path.exists('/data/vt/result_' + get_time() + '.json'):
     with open('/data/vt/result_' + get_time()  +'.json', 'rb') as e:
       dict_total = json.load(e)
   else:
     dict_total = {}
-  if len(list_res) == 0:
-    return
-
   for i in list_res:
     if i[0] == 0 and i[1] == 0:
       continue
