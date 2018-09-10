@@ -24,6 +24,7 @@ def chmod_dir(path_list):
       path_dir = "{0}/{1}".format(path_hd, i)
       os.system('chmod 744 ' + path_dir)
       print i
+    os.system('chmod 744 ' + path_hd)
    
 if __name__ == '__main__':
   path_malhd = '/data/malware'
