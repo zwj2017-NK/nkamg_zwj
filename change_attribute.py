@@ -5,13 +5,12 @@ import os
 
 def change_attribute(list_path):
   for path_hd in list_path:
-    pass
-    #os.system('chown nkamg -R ' + path_hd)
-    #os.system('chgrp nkamg -R ' + path_hd)
-    #os.system('chmod 644 -R ' + path_hd)
-  
+    os.system('chown nkamg -R ' + path_hd)
+    os.system('chgrp nkamg -R ' + path_hd)
+    os.system('chmod 644 -R ' + path_hd)
 
 def chmod_dir(path_list):
+  strpath = list('0123456789abcdef')
   for path_hd in path_list:
     for i in strpath:
       for j in strpath:
