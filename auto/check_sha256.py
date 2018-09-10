@@ -1,28 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
- #Nankai University Information Security
-#QiuKF 1055419050@qq.com
-#check the samples' sha256 
-#record incorrect samples
- import re
+ 
+import re
 from multiprocessing import Process,Pool
 import os
 import pandas as pd
 import time
 import sys
- SAMPLES_PATH='/data/malware/'
+SAMPLES_PATH='/data/malware/'
 #SAMPLES_PATH='/data/benign/'
 def get_sample_sha256(sample_path):
-  
-  #sample_path must be abs path
   compute_sha256=os.popen('sha256sum '+sample_path)
-  
   sha256=((compute_sha256.read()).split())[0]
-  #compute_sha256.read() e.g
-  #'000fffd28bfe1e96a4c8f2763c752e5c0e7f4291defe62d44b30db5f50e40226  0/000fffd28bfe1e96a4c8f2763c752e5c0e7f4291defe62d44b30db5f50e40226\n'
-  #print sha256
-  return sha256  
- def check_sha256(first_dir):
+  return sha256 
+ 
+def check_sha256(first_dir):
   print 'Run task %s (%s)...' % (first_dir, os.getpid())
   incorrect_sha256_samples=[]
   detect_pattern='[0123456789abcdef]{64}$'
@@ -37,7 +29,8 @@ def get_sample_sha256(sample_path):
           print SAMPLES_PATH+each_dir+each_file
           incorrect_sha256_samples.append(SAMPLES_PATH+each_dir+each_file)
   print incorrect_sha256_samples
- def make_file_dir(first):
+  
+def make_file_dir(first):
   ret=[]
   chr_list=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
   tmp=''
@@ -48,8 +41,7 @@ def get_sample_sha256(sample_path):
       ret.append(first+three)
   return ret
   
- def main():
-  
+def main():
   print('Parent process %s.' %os.getpid())
   first_dir=['0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f']
   p=Pool(16)
@@ -57,5 +49,6 @@ def get_sample_sha256(sample_path):
     p.apply_async(check_sha256,args=(each,))
   p.close()
   p.join()
- if __name__=='__main__':
+  
+if __name__=='__main__':
   main()
