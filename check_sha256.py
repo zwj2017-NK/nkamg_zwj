@@ -6,9 +6,6 @@ import codecs
 import hashlib
 import multiprocessing as mp
 
-list_str = '0123456789abcdef'
-#path_test = '/media/zhuwenjun/a046836e-2436-4362-a0f1-0023db7b7ad4/malware'
-
 def get_sha256(x):
   f = codecs.open(x, 'rb')
   sh = hashlib.sha256()
@@ -17,6 +14,7 @@ def get_sha256(x):
   return sha256
 
 def check(list_suffix):
+  print list_suffix
   list_except = []
   for suffix in list_suffix:
     for path_hd in ['/data/benign', '/data/malware']:
@@ -32,7 +30,8 @@ def check(list_suffix):
       print path_dir
   return list_except
 
-if __name__ == '__main__':
+def main():
+  list_str = list('0123456789abcdef')
   pool = mp.Pool(32)
   list_path = []
   for first_dir in list_str:
@@ -41,7 +40,8 @@ if __name__ == '__main__':
         list_path.append(first_dir + second_dir + third_dir)
   m = len(list_path) / 32
   list_task = [list_path[m * i : m * (i + 1)] for i in xrange(32)]
-  result = pool.map(check, list_path[32 * m : 32 * (m + 1)])
+  result = pool.map(check, list_task)
+  print result
   with open('report_about_sample.txt','ab') as f:
     for each in result:
       if len(each) == 0:
@@ -53,3 +53,5 @@ if __name__ == '__main__':
           f.write(path_str + '\n')
   pool.close()
 
+if __name__ == '__main__':
+  main()
