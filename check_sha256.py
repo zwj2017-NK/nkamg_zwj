@@ -41,7 +41,10 @@ def main():
     for each in result:
       if len(each) == 0:
         continue
-      f.write(each + '\n')
+      for sha256 in each:
+        if len(sha256) == 0:
+          continue
+        f.write(sha256 + '\n')
   pool.close()
 
 if __name__ == '__main__':
