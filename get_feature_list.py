@@ -28,12 +28,11 @@ def main():
       for third_dir in list_str:
         list_path.append(first_dir + second_dir + third_dir)
   result = pool.map(check, list_path)
-  with open('todo_list_for_feature.txt','ab') as f:
+  with open('todo_list_for_feature.txt','wb') as f:
     for each in result:
       if len(each) == 0:
         continue
-      else:
-        f.write(each + '\n')
+      f.write(each + '\n')
   pool.close()
   
 if __name__ == '__main__':
