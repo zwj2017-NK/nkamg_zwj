@@ -26,21 +26,7 @@ def move_apk(list_filename):
   for filename in list_filename:
     if not re.match(detect_pattern, filename):
       continue
-
-    #if len(filename) < 64:
-    #  continue
-
     path_file = PATH_SRC + '/' + filename
-    #if 'data' in filename:
-    #  os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
-    #  print path_file + '.data'
-    #  continue
-
-    #if 'xml' in filename:
-    #  os.system('mv ' + path_file  + ' ' + return_path(PATH_DES, filename))
-    #  print path_file + '.xml'
-    #  continue
-
     sha256 = get_sha256(path_file)
     if sha256 == filename:
       os.system('mv ' + path_file + ' ' + return_path(PATH_DES, filename))
